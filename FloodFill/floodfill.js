@@ -7,7 +7,7 @@ image.onload = function () {
     ctx.drawImage(image, 0, 0);
 
     var floodFill = function (x, y) {
-        var p = {
+        var points = {
             right: { 'x': x + 1, 'y': y },
             left: { 'x': x - 1, 'y': y },
             up: { 'x': x, 'y': y - 1 },
@@ -18,10 +18,8 @@ image.onload = function () {
         };
 
         ctx.fillRect(x, y, 1, 1);
-        fillRecursive(p.right);
-        fillRecursive(p.left);
-        fillRecursive(p.up);
-        fillRecursive(p.down);
+        for (var key in points)
+            fillRecursive(points[key]);
     };
 
     floodFill(50, 50);
